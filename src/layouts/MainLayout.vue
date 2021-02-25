@@ -1,16 +1,16 @@
 <template>
   <div class="app-main-layout">
-    <Navbar />
-    <Sidebar />
-    <main class="app-content">
+    <Navbar @toggle="this.isSidebarOpen = !this.isSidebarOpen" />
+    <Sidebar :isOpen="isSidebarOpen" />
+    <main class="app-content" :class="{full: !isSidebarOpen}">
       <div class="app-page">
         <router-view />
       </div>
     </main>
     <div class="fixed-action-btn">
-      <a class="btn-floating btn-large blue" href="#">
+      <router-link class="btn-floating btn-large blue" to="/record">
         <i class="large material-icons">add</i>
-      </a>
+      </router-link>
     </div>
   </div>
 </template>
@@ -21,9 +21,12 @@ import Sidebar from '@/components/app/Sidebar';
 
 export default {
   name: 'main-layout',
+  data: () => ({
+    isSidebarOpen: true
+  }),
   components: {
     Navbar,
     Sidebar
-  }
+  },
 }
 </script>
